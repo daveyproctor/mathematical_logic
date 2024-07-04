@@ -1,0 +1,11 @@
+services:
+  python:
+    build:
+      context: docker/python
+    volumes:
+      - ./source/notebooks:/app/notebooks
+    ports:
+      - "${JUPYTER_PORT}:8888"
+    environment:
+      - JUPYTER_TOKEN=${JUPYTER_TOKEN}
+    entrypoint: ["jupyter", "notebook", "--ip=0.0.0.0", "--no-browser", "--allow-root", "--NotebookApp.token=${JUPYTER_TOKEN}"]
